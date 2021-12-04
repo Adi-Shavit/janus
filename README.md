@@ -53,7 +53,7 @@ Or in mathematical terms:
 
 If we take our example situation and draw a heat map out we get the following:
 
-![Similarity Equation](imgs/affinity_propagation/similarity_heatmap.svg)
+![Similarity heat map](imgs/affinity_propagation/similarity_heatmap.svg)
 
 The values in the off diagonal elements will dictate the number of clusters formed. (The smaller the value, the fewer clusters obtained.)
 
@@ -63,7 +63,61 @@ applications because it is an appropriate optimization function when the desired
 between the `cluster members` and the `cluster exemplar`.
 </details>
 
+<details>
+<summary>Responsibility Matrix</summary>
 
+We need some way to figure out how well suited an element `k` is to be an exemplar for an element `i`. This is where the
+responsibility matrix comes into play. Responsibility `r(i, k)` will quantify how well suited `k` is to be an exemplar for `i`
+while also taking into account the nearest contender `k'` to be an exemplar for `i`.
+
+Mathematically this can be expressed as:
+![Affinity Propagation Responsibility Equation](imgs/affinity_propagation/responsibility_equation.svg)
+
+> The responsibility matrix is initialized with zeros
+
+The intuition behind the formula is simple, `r(i, k)` can be thought of as the relative similarity between `i` and `k`.
+It essentially quantifies how similar `i` is to `k`, compared to `k'` while taking into account the availability of `k'`.
+The responsibility of `k` to `i` will decrease as the availability of `k'` to `i` increases.
+</details>
+
+<details>
+<summary>Availability Matrix</summary>
+
+Availability can be described as:
+> How appropriate is it for `i` to choose `k` as its exemplar
+
+The availability of an element `i` takes into account the support of other elements `k` should be its exemplar.
+
+Mathematically this can be expressed as:
+![Affinity Propagation Availability Equation](imgs/affinity_propagation/availability_equation.svg)
+
+Availability can be thought of as the self-responsibility of `k` + the sum of the positive responsibilities of `k` towards
+elements other than `i`.
+
+We only include positive responsibilities because an exemplar should positively explain at _least_ some data points well,
+regardless of how poorly it explains other data points.
+
+if self-responsibility is negative, it means that `k` is more suitable to belong to some other exemplar, rather than being an
+exemplar. 
+
+The maximum value of `a(i, k)` is 0.
+
+self-availability can be calculated as follows:
+![Affinity Propagation Self Availability Equation](imgs/affinity_propagation/self_availability_equation.svg)
+
+`a(k ,k)` reflects the accumulated evidence that element `k` is suitable to be an exemplar.
+This is based on the positive responsibilities of `k` towards other elements.
+
+The `Responsibility` and `Availability` matrices are iteratively updated.
+You may select when to terminate the procedure, although typically one of the following options is chosen:
+* After a fixed number of iterations
+* After changes in the values obtained fall below some threshold
+* The values stay constant for some number of iterations
+
+In this example, I chose to run the process till the values were constant and I got the following output:
+
+
+</details>
 
 
 ## Use Cases
