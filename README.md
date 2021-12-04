@@ -89,6 +89,7 @@ Availability can be described as:
 The availability of an element `i` takes into account the support of other elements `k` should be its exemplar.
 
 Mathematically this can be expressed as:
+
 ![Affinity Propagation Availability Equation](imgs/affinity_propagation/availability_equation.svg)
 
 Availability can be thought of as the self-responsibility of `k` + the sum of the positive responsibilities of `k` towards
@@ -103,6 +104,7 @@ exemplar.
 The maximum value of `a(i, k)` is 0.
 
 self-availability can be calculated as follows:
+
 ![Affinity Propagation Self Availability Equation](imgs/affinity_propagation/self_availability_equation.svg)
 
 `a(k ,k)` reflects the accumulated evidence that element `k` is suitable to be an exemplar.
