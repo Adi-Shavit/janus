@@ -118,9 +118,21 @@ You may select when to terminate the procedure, although typically one of the fo
 
 In this example, I chose to run the process till the values were constant and I got the following output:
 
+#### Availability Matrix
+
+![Affinity Propagation Final Availability Heat Map](imgs/affinity_propagation/final_availability_heatmap.svg)
+
+#### Responsibility Matrix
+
+![Affinity Propagation Final Responsibility Heat Map](imgs/affinity_propagation/final_responsibility_heatmap.svg)
 
 </details>
 
+<details>
+<summary>Criterion Matrix</summary>
+
+
+</details>
 
 ## Use Cases
 It was originally developed as a solution for ..., nowadays its mostly used as ...
