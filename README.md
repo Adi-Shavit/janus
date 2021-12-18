@@ -71,6 +71,7 @@ responsibility matrix comes into play. Responsibility `r(i, k)` will quantify ho
 while also taking into account the nearest contender `k'` to be an exemplar for `i`.
 
 Mathematically this can be expressed as:
+
 ![Affinity Propagation Responsibility Equation](imgs/affinity_propagation/responsibility_equation.svg)
 
 > The responsibility matrix is initialized with zeros
@@ -131,21 +132,41 @@ In this example, I chose to run the process till the values were constant and I 
 <details>
 <summary>Criterion Matrix</summary>
 
+Once we finished updating the The `Responsibility` and `Availability` matrices, we can begin calculating
+the `Criterion` matrix. The `Criterion` matrix `c` is the sum of the `Responsibility` matrix `r` and the `Availability` matrix
+`a`.
 
+If we sum up the `Availability` and `Responsibility` matrices we got previously we'd end up with a `Criterion` matrix that looks
+like this:
+
+![Affinity Propagation Final Criterion Heat Map](imgs/affinity_propagation/criterion_heatmap.svg)
+
+The element with the highest Criterion value in each row would be designated to be an exemplar.
+Elements in the rows sharing an exemplar are clustered together.
+
+Essentially, an element `i` will be assigned to an exemplar `k` which is not only highly responsible but also highly available to `i`.
+This relationship can be described mathematically as follows:
+
+![Affinity Propagation Criterion Equation](imgs/affinity_propagation/criterion_equation.svg)
+
+
+In our case `Google`, `Amazon`, `Apple` are clustered together, while `Microsoft` and `Samsung` are another one.
+
+> **NOTE**: Since a distance metric is used to calculate similarities, 
+> it is advised to standardize the parameters before clustering using Affinity Propagation.
 </details>
 
 ## Use Cases
-It was originally developed as a solution for ..., nowadays its mostly used as ...
 
-| Pros | Cons |
-| :---: | :---: |
-| ... | ... |
-| ... | ... |
+It's appropriate to use `Affinity Propagation` whenever there is a way to measure/compute a number for each pair of data
+points, which indicates how similar they are (high values indicate high similarity whereas low values indicate low similarity).
+
+Examples of using Affinity Propagation range from Analyzing network traffic, Analyzing basketball statistics, Identifying common trading patterns, and many more.
 
 </details>
 
 <details>
-<summary>Affinity Propagation</summary>
+<summary>DBSCAN & HDBSCAN</summary>
 
 ## History
 This algorithm was created in ... by ...
